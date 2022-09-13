@@ -13,7 +13,7 @@
 #   有问题快来钉钉群问一下吧：33947367
 # ------------------------------------
 edition: 1.0.0
-access: "default"
+access: "website_access"
 
 vars: # 全局变量
   region: "cn-hangzhou"
