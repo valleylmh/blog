@@ -137,7 +137,7 @@ module.exports = {
         {
           title: '年度总结',
           collapsable: false,
-          children: ['2019','2020','2021','2022']
+          children: ['2019','2020','2021','2022','2023']
         },
       ],
       '/life/house/': [
