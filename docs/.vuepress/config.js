@@ -63,8 +63,8 @@ module.exports = {
         ariaLabel: '只要学得动，就往死里学',
         items: [
           { text: '学习路线', link: '/roadmap/' },
-          { text: 'VueJs3.0', link: '/vue3.x/notes/' },
-          { text: 'VueJs2.x', link: '/vue2.x/' },
+          { text: 'Vue.js 3', link: '/vue3.x/notes/' },
+          { text: 'Vue.js 2', link: '/vue2.x/' },
         ]
       },
       {
@@ -137,7 +137,7 @@ module.exports = {
         {
           title: '年度总结',
           collapsable: false,
-          children: ['2019','2020','2021','2022','2023']
+          children: ['2019','2020','2021','2022','2023','2024']
         },
       ],
       '/life/house/': [
