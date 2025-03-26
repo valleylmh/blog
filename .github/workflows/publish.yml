@@ -12,8 +12,9 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 18
-          registry-url: https://registry.npm.taobao.org
-      - run: npm install
+          registry-url: https://registry.npmmirror.com
+      - run: npm config set strict-ssl false
+      - run: npm install --legacy-peer-deps
       - run: npm install -g @serverless-devs/s
       - run: s config add --AccountID ${{secrets.ALIYUN_ACCOUNT_ID}} --AccessKeyID ${{secrets.ALIYUN_ACCESS_KEY_ID}} --AccessKeySecret ${{secrets.ALIYUN_ACCESS_KEY_SECRET}} -a website_access
       - run: s deploy
