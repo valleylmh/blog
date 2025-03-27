@@ -18,6 +18,5 @@ jobs:
       - run: npm config set strict-ssl false
       - run: npm install --legacy-peer-deps
       - run: npm install -g @serverless-devs/s
-      - run: npm run build
       - run: s config add --AccountID ${{secrets.ALIYUN_ACCOUNT_ID}} --AccessKeyID ${{secrets.ALIYUN_ACCESS_KEY_ID}} --AccessKeySecret ${{secrets.ALIYUN_ACCESS_KEY_SECRET}} -a website_access
       - run: s deploy
