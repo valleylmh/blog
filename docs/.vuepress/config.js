@@ -6,6 +6,7 @@ const dataStructure = require('../dataStructure/sidebar')
 const algorithm = require('../algorithm/sidebar')
 const nodeJs = require('../nodeJs/sidebar')
 const trainingJs = require('../trainingJs/sidebar')
+const jobJs = require('../companyJob/sidebar')
 // console.log(path.resolve(__dirname, './public/bdunion.txt'))
 module.exports = {
   // base: '/',
@@ -62,6 +63,7 @@ module.exports = {
         text: 'FrontEnd',
         ariaLabel: '只要学得动，就往死里学',
         items: [
+          { text: '工作笔录', link: '/companyJob/' },
           { text: '学习路线', link: '/roadmap/' },
           { text: 'Vue.js 3', link: '/vue3.x/notes/' },
           { text: 'Vue.js 2', link: '/vue2.x/' },
@@ -139,6 +141,13 @@ module.exports = {
           collapsable: false,
           children: ['2019','2020','2021','2022','2023','2024']
         },
+      ],
+      '/companyJob/': [
+        {
+          title: '工作笔录',
+          collapsable: false,
+          children: jobJs
+        }
       ],
       '/life/house/': [
         ['buy-house', '2021年记录杭州买房大事'],
