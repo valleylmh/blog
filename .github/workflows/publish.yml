@@ -8,7 +8,7 @@ jobs:
   publish-website:
     runs-on: ubuntu-latest
     env:
-      NODE_OPTIONS: --openssl-legacy-provider
+      NODE_OPTIONS: ""
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2

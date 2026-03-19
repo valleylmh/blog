@@ -1,3 +1,3 @@
-# 原理图
+# 原理�?
 
-<img :src="$withBase('/assets/reactive.png')">
+<img :src="/assets/reactive.png">

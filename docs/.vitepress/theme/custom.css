@@ -1,0 +1,260 @@
+:root {
+  /* 使用 VitePress 提供的变量来实现全局配置 */
+  --vp-sidebar-width: 260px;
+  /* 移除 --vp-layout-max-width: 100% 以恢复默认布局最大宽度约束（使左右两边内缩留白） */
+  --vp-layout-max-width: 1440px; 
+}
+
+/* 修复 Navbar 标题布局 */
+.VPNavBar.has-sidebar .title {
+  padding-left: 0;
+  border-bottom: none;
+}
+
+.VPNavBarTitle.has-sidebar {
+  width: var(--vp-sidebar-width);
+  padding-left: 24px;
+}
+
+/* 增加内容区域宽度 */
+@media (min-width: 960px) {
+  .VPContent.has-sidebar {
+    padding-left: var(--vp-sidebar-width);
+  }
+}
+
+/* 移除了强行覆盖 100% max-width 的配置，让侧边栏按布局限定宽度缩进 */
+
+.VPDoc .content-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* 侧边栏样式微调 */
+.VPSidebar {
+  width: var(--vp-sidebar-width);
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.VPSidebarItem.level-0 {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+/* 首页 Hero 区域：通过覆盖 VitePress 的默认 Grid/Flex 逻辑来实现垂直居中 */
+.VPHero {
+  margin-top: 40px;
+  padding: 0;
+}
+
+/* 覆盖不同断点下的布局行为 */
+.VPHero .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 0 auto;
+}
+
+/* VitePress 默认在 640px 和 960px 会通过 media query 设置 grid 或不同的 flex 属性 */
+/* 我们显式声明这些断点下的行为，以取代 !important */
+@media (min-width: 640px) {
+  .VPHero .container {
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 960px) {
+  .VPHero .container {
+    display: flex;
+    /* 强制覆盖默认可能存在的 grid */
+    flex-direction: column;
+    max-width: 100%;
+  }
+}
+
+.VPHero .main {
+  order: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+@media (min-width: 960px) {
+  .VPHero .main {
+    max-width: none;
+    text-align: center;
+  }
+}
+
+/* 头像图片 */
+.VPHero .image {
+  order: 1;
+  margin: 0 auto 1.5rem auto;
+  position: relative;
+  transform: none;
+}
+
+.VPHero .image-container {
+  width: 180px;
+  height: 180px;
+  margin: 0 auto;
+  transform: none;
+}
+
+.VPHero img {
+  border-radius: 50%;
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border: 4px solid #fff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* 文本样式：显式声明断点以覆盖默认主题的字体缩放 */
+.VPHero .name {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--vp-c-text-1);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.VPHero .text {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--vp-c-brand);
+  margin: 0.5rem 0;
+  background-image: linear-gradient(-45deg, #ffcb47, #e34ba9, #369eff, #95f3d9);
+  background-size: 400% 400%;
+  border-radius: inherit;
+  animation: 5s rainbow 5s ease infinite;
+  position: relative;
+  z-index: 5;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* 第三行：口号 */
+.VPHero .tagline {
+  font-size: 1.1rem;
+  color: var(--vp-c-text-2);
+  margin: 0 0 2rem 0;
+
+  /* 张鑫旭风格打字机特效：直接对容器进行动画 */
+  display: inline-block;
+  width: 14em;
+  /* 14个中文字符的宽度 */
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid var(--vp-c-text-2);
+  /* 光标 */
+
+  /* 动画：typing负责文字展开，blink-caret负责光标闪烁 */
+  animation:
+    typing 4s steps(14, end) infinite,
+    blink-caret 0.75s step-end infinite;
+}
+
+@keyframes rainbow {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes typing {
+  0% {
+    width: 0;
+  }
+
+  /* 50% 到 100% 保持宽度不变，实现打完字后的停留效果 */
+  50%,
+  100% {
+    width: 14em;
+  }
+}
+
+@keyframes blink-caret {
+
+  from,
+  to {
+    border-color: transparent;
+  }
+
+  50% {
+    border-color: var(--vp-c-text-2);
+  }
+}
+
+@media (min-width: 640px) {
+  .VPHero .name {
+    font-size: 3.5rem;
+  }
+
+  .VPHero .text {
+    font-size: 2.2rem;
+  }
+
+  .VPHero .tagline {
+    font-size: 1.2rem;
+  }
+}
+
+@media (min-width: 960px) {
+  .VPHero .name {
+    font-size: 4rem;
+  }
+
+  .VPHero .text {
+    font-size: 2.5rem;
+  }
+}
+
+/* 按钮区域 */
+.VPHero .actions {
+  order: 3;
+  justify-content: center;
+  display: flex;
+  gap: 12px;
+}
+
+/* --- 自定义滚动条样式 --- */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--vp-c-divider);
+  border-radius: 20px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+  transition: background-color 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--vp-c-brand-1);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--vp-c-divider) transparent;
+}
