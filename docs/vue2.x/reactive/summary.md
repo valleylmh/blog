@@ -1,3 +1,3 @@
-# 原理�?
+# 原理�?
 
-<img :src="/assets/reactive.png">
+<img src="/assets/reactive.png">
