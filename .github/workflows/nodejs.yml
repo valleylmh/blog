@@ -10,10 +10,10 @@ jobs:
       NODE_OPTIONS: --openssl-legacy-provider
     steps:
     - uses: actions/checkout@v1
-    - name: Use Node.js 18
+    - name: Use Node.js 23
       uses: actions/setup-node@v1
       with:
-        node-version: 18
+        node-version: 23
     - run: npm config set strict-ssl false
     - name: npm install, build
       run: |
