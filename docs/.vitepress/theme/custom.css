@@ -258,3 +258,41 @@
   scrollbar-width: thin;
   scrollbar-color: var(--vp-c-divider) transparent;
 }
+
+/* --- 强制在 960px ~ 1279px (如 13寸笔记本缩放显示) 显示右侧页面导航大纲 --- */
+@media (min-width: 960px) and (max-width: 1279.9px) {
+  /* 隐藏顶部折叠的页面导航 */
+  .VPLocalNav {
+    display: none !important;
+  }
+  
+  /* 强制显示右侧大纲 */
+  .VPDoc .aside {
+    display: block !important;
+  }
+
+  /* 调整容器为 flex 布局，使大纲居右 */
+  .VPDoc .container {
+    display: flex !important;
+    justify-content: center !important;
+  }
+
+  /* 中间内容区域占用剩余空间 */
+  .VPDoc .content {
+    order: 1 !important;
+    margin: 0 !important;
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
+    width: 100% !important;
+    padding: 0 16px 128px !important;
+  }
+
+  .VPDoc.has-aside .content-container {
+    max-width: 100% !important;
+  }
+
+  .VPDoc.has-sidebar .content {
+    /* 预留左侧菜单(260px)和右侧大纲(256px)及一些 padding 空间 */
+    max-width: calc(100vw - var(--vp-sidebar-width, 260px) - 256px - 32px) !important;
+  }
+}
