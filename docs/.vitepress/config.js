@@ -6,6 +6,7 @@ const algorithm = require('../algorithm/sidebar')
 const nodeJs = require('../nodeJs/sidebar')
 const trainingJs = require('../trainingJs/sidebar')
 const jobJs = require('../companyJob/sidebar')
+const openClaw = require('../ai/openclaw/sidebar')
 
 function convertSidebar(sidebarConfig) {
   const result = {}
@@ -81,21 +82,32 @@ module.exports = {
     },
     nav: [
       {
-        text: 'FrontEnd',
+        text: 'AI驱动',
         items: [
-          { text: '工作笔录', link: '/companyJob/' },
-          { text: '学习路线', link: '/roadmap/' },
-          { text: 'Vue.js 3', link: '/vue3.x/notes/' },
-          { text: 'Vue.js 2', link: '/vue2.x/' },
+          { text: 'openclaw养虾记', link: '/ai/openclaw/' },
         ]
       },
       {
-        text: '前端进阶',
+        text: 'FrontEnd',
         items: [
-          { text: 'Node.js', link: '/nodeJs/notes/' },
-          { text: '数据结构', link: '/dataStructure/' },
-          { text: '算法', link: '/algorithm/' },
-          { text: '手撕JS', link: '/trainingJs/' },
+          {
+            text: '基础/框架',
+            items: [
+              { text: '工作笔录', link: '/companyJob/' },
+              { text: '学习路线', link: '/roadmap/' },
+              { text: 'Vue.js 3', link: '/vue3.x/notes/' },
+              { text: 'Vue.js 2', link: '/vue2.x/' },
+            ]
+          },
+          {
+            text: '前端进阶',
+            items: [
+              { text: 'Node.js', link: '/nodeJs/notes/' },
+              { text: '数据结构', link: '/dataStructure/' },
+              { text: '算法', link: '/algorithm/' },
+              { text: '手撕JS', link: '/trainingJs/' },
+            ]
+          }
         ]
       },
       {
@@ -109,6 +121,7 @@ module.exports = {
       { text: 'github', link: 'https://github.com/valleylmh/vuepress-blog' },
     ],
     sidebar: convertSidebar({
+      '/ai/openclaw/': openClaw,
       '/nodeJs/notes/': nodeJs,
       '/dataStructure/': dataStructure,
       '/algorithm/': algorithm,
