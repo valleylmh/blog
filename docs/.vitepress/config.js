@@ -101,7 +101,6 @@ module.exports = {
       {
         text: '随笔',
         items: [
-          { text: '买房小记', link: '/life/house/' },
           { text: '年度总结', link: '/life/year/' },
           { text: '杂记', link: '/life/other/' },
           { text: '老喻的人生算法课', link: '/life_algorithm/' },
@@ -124,13 +123,17 @@ module.exports = {
         },
       ],
       '/companyJob/': jobJs,
-      '/life/house/': [
-        ['buy-house', '2021年记录杭州买房大事'],
-        ['prepare-buy-house', '杭州看房小记（一）'],
-        ['prepare-buy-house2', '看房小记（二）'],
-        ['prepare-buy-house3', '看房小记（三）——买房自测'],
-      ],
       '/life/other/': [
+        {
+          title: '买房小记',
+          collapsable: false,
+          children: [
+            ['house/buy-house', '2021年记录杭州买房大事'],
+            ['house/prepare-buy-house', '杭州看房小记（一）'],
+            ['house/prepare-buy-house2', '看房小记（二）'],
+            ['house/prepare-buy-house3', '看房小记（三）——买房自测'],
+          ]
+        },
         ['homeTown01', '老家农村的结婚：赤裸裸的金钱交易'],
         ['homeTown02', '老家农村的结婚（二）——故事篇']
       ],
