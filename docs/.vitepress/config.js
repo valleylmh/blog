@@ -6,7 +6,7 @@ const algorithm = require('../algorithm/sidebar')
 const nodeJs = require('../nodeJs/sidebar')
 const trainingJs = require('../trainingJs/sidebar')
 const jobJs = require('../companyJob/sidebar')
-const openClaw = require('../ai/openclaw/sidebar')
+const openClawSidebar = require('../ai/openclaw/sidebar')
 
 function convertSidebar(sidebarConfig) {
   const result = {}
@@ -19,8 +19,13 @@ function convertSidebar(sidebarConfig) {
       return { text, link: (key + group).replace(/\.md$/, '') }
     }
     const item = {
-      text: group.title || group.text || '章节',
-      items: (group.children || group.items || []).map(child => processGroup(child, key))
+      text: group.text || group.title || '章节'
+    }
+    if (group.link) {
+      item.link = (key + group.link).replace(/\.md$/, '')
+    }
+    if (group.children || group.items) {
+      item.items = (group.children || group.items).map(child => processGroup(child, key))
     }
     if (group.collapsable !== undefined || group.collapsed !== undefined) {
       item.collapsed = group.collapsable === false ? false : (group.collapsed !== undefined ? group.collapsed : true)
@@ -121,7 +126,7 @@ module.exports = {
       { text: 'github', link: 'https://github.com/valleylmh/vuepress-blog' },
     ],
     sidebar: convertSidebar({
-      '/ai/openclaw/': openClaw,
+      '/ai/openclaw/': openClawSidebar,
       '/nodeJs/notes/': nodeJs,
       '/dataStructure/': dataStructure,
       '/algorithm/': algorithm,

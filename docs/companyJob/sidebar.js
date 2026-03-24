@@ -3,8 +3,8 @@ module.exports = [
         title: '求索篇',
         collapsable: false,
         children: [
-            "study/浏览器渲染原理.md",
-            "study/vue2使用异步mixin.md", 
+            { text: '浏览器渲染原理', link: "study/浏览器渲染原理.md" },
+            { text: 'vue2使用异步mixin', link: "study/vue2使用异步mixin.md" },
         ]
     },
     {
