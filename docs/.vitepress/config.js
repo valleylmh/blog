@@ -12,17 +12,19 @@ function convertSidebar(sidebarConfig) {
   const result = {}
   const processGroup = (group, key) => {
     if (Array.isArray(group)) {
-      return { text: group[1] || group[0], link: (key + group[0]).replace(/\.md$/, '') }
+      return { text: group[1] || group[0], link: (key + group[0]) }
     }
     if (typeof group === 'string') {
       const text = group === '' ? '简介' : (group.split('/').pop().replace(/\.md$/, '') || group)
-      return { text, link: (key + group).replace(/\.md$/, '') }
+      const link = (key + group)
+      return { text, link: link.endsWith('/') || link.endsWith('.md') ? link : (link + '.md') }
     }
     const item = {
       text: group.text || group.title || '章节'
     }
     if (group.link) {
-      item.link = (key + group.link).replace(/\.md$/, '')
+      const link = (key + group.link)
+      item.link = link.endsWith('/') || link.endsWith('.md') ? link : (link + '.md')
     }
     if (group.children || group.items) {
       item.items = (group.children || group.items).map(child => processGroup(child, key))
@@ -42,7 +44,7 @@ function convertSidebar(sidebarConfig) {
 module.exports = {
   outDir: '../dist',
   ignoreDeadLinks: true,
-  cleanUrls: true,
+  cleanUrls: false,
   title: '一界码农',
   description: '越努力越幸运',
   head: [
