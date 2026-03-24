@@ -42,6 +42,7 @@ function convertSidebar(sidebarConfig) {
 module.exports = {
   outDir: '../dist',
   ignoreDeadLinks: true,
+  cleanUrls: true,
   title: '一界码农',
   description: '越努力越幸运',
   head: [
