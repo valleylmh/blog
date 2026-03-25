@@ -6,7 +6,7 @@ const algorithm = require('../algorithm/sidebar')
 const nodeJs = require('../nodeJs/sidebar')
 const trainingJs = require('../trainingJs/sidebar')
 const jobJs = require('../companyJob/sidebar')
-const openClawSidebar = require('../ai/openclaw/sidebar')
+const articlesSidebar = require('../ai/articles/sidebar')
 
 function convertSidebar(sidebarConfig) {
   const result = {}
@@ -92,7 +92,7 @@ module.exports = {
       {
         text: 'AI驱动',
         items: [
-          { text: 'openclaw养虾记', link: '/ai/openclaw/' },
+          { text: '碎片成文', link: '/ai/articles/' },
         ]
       },
       {
@@ -129,7 +129,7 @@ module.exports = {
       { text: 'github', link: 'https://github.com/valleylmh/vuepress-blog' },
     ],
     sidebar: convertSidebar({
-      '/ai/openclaw/': openClawSidebar,
+      '/ai/articles/': articlesSidebar,
       '/nodeJs/notes/': nodeJs,
       '/dataStructure/': dataStructure,
       '/algorithm/': algorithm,

@@ -4,3 +4,6 @@ dist
 .vitepress/cache
 .vitepress/.temp
 .vitepress/dist
+.agents
+.env
+wechat/.wechat_token.json
