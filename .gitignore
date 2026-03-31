@@ -8,3 +8,4 @@ dist
 .env
 wechat/.wechat_token.json
 wechat/preview.html
+comic
