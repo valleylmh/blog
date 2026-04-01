@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>用膳大转盘 - 今天吃什么</title>
+    <!-- 引入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 Lucide 图标库 -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* 隐藏的自定义滚动条样式 */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1;
+            border-radius: 20px;
+        }
+        
+        /* 避免移动端点击出现高亮背景 */
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-50 font-sans text-slate-800 p-2 sm:p-4 md:p-8 flex justify-center items-center">
+
+    <div class="max-w-4xl w-full bg-white rounded-2xl md:rounded-3xl shadow-xl overflow-hidden flex flex-col md:flex-row md:min-h-[600px]">
+        
+        <!-- 左侧：大转盘区域 -->
+        <div class="w-full md:flex-1 p-6 md:p-8 bg-slate-100 flex flex-col items-center justify-center relative border-b md:border-b-0 md:border-r border-slate-200">
+            <div class="flex items-center gap-2 mb-6 md:mb-8 text-xl md:text-2xl font-bold text-slate-700">
+                <i data-lucide="utensils" class="text-orange-500 w-6 h-6 md:w-8 md:h-8"></i>
+                <h1>今天吃什么？</h1>
+            </div>
+
+            <!-- 转盘容器 -->
+            <div class="relative w-[280px] h-[280px] sm:w-72 sm:h-72 md:w-80 md:h-80 mb-6 md:mb-8">
+                <!-- 顶部的指示小箭头 -->
+                <div class="absolute -top-4 left-1/2 -translate-x-1/2 z-20 w-0 h-0 
+                            border-l-[12px] border-l-transparent 
+                            border-r-[12px] border-r-transparent 
+                            border-t-[24px] border-t-slate-800 drop-shadow-md">
+                </div>
+
+                <!-- 转盘本体 -->
+                <div id="wheel" 
+                     class="w-full h-full rounded-full border-4 border-white shadow-lg overflow-hidden relative transition-transform duration-[4000ms] ease-[cubic-bezier(0.2,0.8,0.2,1)]">
+                    <!-- JS动态插入内容 -->
+                </div>
+            </div>
+
+            <button id="spin-btn" onclick="spinWheel()"
+                    class="w-full max-w-[200px] py-3 px-6 rounded-full text-white font-bold text-lg shadow-md transition-all relative z-10 bg-orange-500 hover:bg-orange-600 hover:shadow-lg active:scale-95">
+                开 转 ！
+            </button>
+
+            <!-- 结果弹窗提示 (初始隐藏) -->
+            <div id="winner-popup" class="hidden fixed inset-0 bg-white/95 backdrop-blur-sm z-50 flex-col items-center justify-center transition-opacity duration-300 opacity-0">
+                <i data-lucide="party-popper" class="w-20 h-20 text-orange-500 mb-4 animate-bounce"></i>
+                <h2 class="text-2xl md:text-3xl font-bold text-slate-500 mb-2">天意让你吃：</h2>
+                <p id="winner-text" class="text-5xl md:text-6xl font-black text-slate-800 text-center px-4 mb-10 drop-shadow-sm"></p>
+                <button onclick="closeWinnerPopup()"
+                        class="px-8 py-3 bg-slate-800 text-white rounded-full hover:bg-slate-700 transition-colors font-medium shadow-lg text-lg">
+                    我知道了
+                </button>
+            </div>
+        </div>
+
+        <!-- 右侧：选项管理区域 -->
+        <div class="w-full md:flex-1 p-5 md:p-8 flex flex-col h-[420px] md:h-auto">
+            <div class="flex justify-between items-center mb-4 md:mb-6">
+                <h2 class="text-lg md:text-xl font-bold text-slate-700">候选菜单 (<span id="options-count"></span>)</h2>
+                <button onclick="resetDefault()"
+                        class="text-sm text-slate-500 hover:text-orange-500 flex items-center gap-1 transition-colors"
+                        title="恢复默认菜单">
+                    <i data-lucide="refresh-cw" class="w-4 h-4"></i> 恢复默认
+                </button>
+            </div>
+
+            <form id="add-form" onsubmit="handleAddOption(event)" class="flex gap-2 mb-6">
+                <input type="text" id="new-option-input" placeholder="想吃点啥别的？" maxlength="12"
+                       class="flex-1 px-4 py-2 bg-slate-100 border-none rounded-xl focus:ring-2 focus:ring-orange-500 outline-none transition-all" />
+                <button type="submit" id="add-btn" disabled
+                        class="bg-slate-800 text-white p-2 px-4 rounded-xl hover:bg-slate-700 disabled:opacity-50 transition-colors flex items-center gap-1">
+                    <i data-lucide="plus" class="w-5 h-5"></i> 添加
+                </button>
+            </form>
+
+            <div id="options-list" class="flex-1 overflow-y-auto pr-2 space-y-2 custom-scrollbar">
+                <!-- JS动态插入列表项 -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 预设配置
+        const COLORS = [
+            '#FF9AA2', '#FFB7B2', '#FFDAC1', '#E2F0CB', 
+            '#B5EAD7', '#C7CEEA', '#F1CBFF', '#BDE0FE',
+            '#FDE2E4', '#D3EEFF'
+        ];
+
+        const DEFAULT_OPTIONS = [
+            { id: '1', text: '火锅' },
+            { id: '2', text: '烧烤' },
+            { id: '3', text: '麦当劳/肯德基' },
+            { id: '4', text: '轻食沙拉' },
+            { id: '5', text: '兰州拉面' },
+            { id: '6', text: '隆江猪脚饭' },
+            { id: '7', text: '日料/寿司' },
+            { id: '8', text: '黄焖鸡米饭' }
+        ];
+
+        // 状态变量
+        let options = [...DEFAULT_OPTIONS];
+        let rotation = 0;
+        let isSpinning = false;
+
+        // DOM 元素引用
+        const wheelEl = document.getElementById('wheel');
+        const listEl = document.getElementById('options-list');
+        const countEl = document.getElementById('options-count');
+        const spinBtn = document.getElementById('spin-btn');
+        const addInput = document.getElementById('new-option-input');
+        const addBtn = document.getElementById('add-btn');
+        const popupEl = document.getElementById('winner-popup');
+        const winnerTextEl = document.getElementById('winner-text');
+
+        // 初始化
+        function init() {
+            render();
+            // 监听输入框变化，控制添加按钮状态
+            addInput.addEventListener('input', (e) => {
+                addBtn.disabled = !e.target.value.trim();
+            });
+        }
+
+        // 渲染大转盘和列表
+        function render() {
+            countEl.textContent = options.length;
+            renderWheel();
+            renderList();
+            // 重新初始化新添加的 Lucide 图标
+            lucide.createIcons();
+        }
+
+        function renderWheel() {
+            if (options.length === 0) {
+                wheelEl.style.background = '#e2e8f0';
+                wheelEl.innerHTML = '';
+                return;
+            }
+
+            const sliceDegree = 360 / options.length;
+            let gradientParts = [];
+            let labelsHTML = '';
+
+            options.forEach((opt, index) => {
+                // 计算背景渐变
+                const color = COLORS[index % COLORS.length];
+                const start = index * sliceDegree;
+                const end = (index + 1) * sliceDegree;
+                gradientParts.push(`${color} ${start}deg ${end}deg`);
+
+                // 计算文字位置
+                const centerAngle = index * sliceDegree + sliceDegree / 2;
+                labelsHTML += `
+                    <div class="absolute top-1/2 left-1/2 w-[50%] h-0 origin-left" style="transform: rotate(${centerAngle - 90}deg)">
+                        <span class="absolute right-[15%] top-1/2 -translate-y-1/2 text-sm md:text-base font-bold text-slate-800/80 max-w-[80px] truncate block">
+                            ${opt.text}
+                        </span>
+                    </div>
+                `;
+            });
+
+            wheelEl.style.background = `conic-gradient(${gradientParts.join(', ')})`;
+            
+            // 添加中心圆点装饰
+            const centerDot = `
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full shadow-inner z-10 flex items-center justify-center">
+                    <div class="w-3 h-3 bg-slate-300 rounded-full"></div>
+                </div>
+            `;
+            wheelEl.innerHTML = labelsHTML + centerDot;
+        }
+
+        function renderList() {
+            if (options.length === 0) {
+                listEl.innerHTML = `
+                    <div class="text-center text-slate-400 py-8">
+                        菜单空空如也，快加点吃的吧！
+                    </div>
+                `;
+                return;
+            }
+
+            listEl.innerHTML = options.map(opt => `
+                <div class="flex justify-between items-center bg-white border border-slate-100 p-3 rounded-xl shadow-sm hover:shadow-md transition-shadow group">
+                    <span class="font-medium text-slate-700">${opt.text}</span>
+                    <button onclick="handleRemoveOption('${opt.id}')"
+                            class="text-slate-400 hover:text-red-500 p-1 rounded-lg hover:bg-red-50 transition-colors opacity-100 md:opacity-0 group-hover:opacity-100"
+                            title="删除此项">
+                        <i data-lucide="trash-2" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        // 添加选项
+        function handleAddOption(e) {
+            e.preventDefault();
+            const text = addInput.value.trim();
+            if (!text) return;
+            
+            if (options.length >= 15) {
+                alert("选项太多啦，大转盘装不下啦！");
+                return;
+            }
+
+            options.push({ id: Date.now().toString(), text: text });
+            addInput.value = '';
+            addBtn.disabled = true;
+            render();
+        }
+
+        // 删除选项
+        function handleRemoveOption(id) {
+            if (options.length <= 2) {
+                alert("至少保留两个选项才能转起来呀！");
+                return;
+            }
+            options = options.filter(opt => opt.id !== id);
+            render();
+        }
+
+        // 恢复默认
+        function resetDefault() {
+            options = [...DEFAULT_OPTIONS];
+            render();
+        }
+
+        // 开始旋转
+        function spinWheel() {
+            if (isSpinning || options.length === 0) return;
+            
+            isSpinning = true;
+            
+            // 更新按钮状态
+            spinBtn.disabled = true;
+            spinBtn.innerText = '正在听天由命...';
+            spinBtn.classList.remove('bg-orange-500', 'hover:bg-orange-600', 'hover:shadow-lg', 'active:scale-95');
+            spinBtn.classList.add('bg-slate-400', 'cursor-not-allowed', 'transform', 'scale-95');
+
+            // 计算旋转角度
+            const spins = 5;
+            const extraDegrees = Math.floor(Math.random() * 360);
+            const totalDegrees = spins * 360 + extraDegrees;
+            rotation += totalDegrees;
+            
+            // 应用旋转
+            wheelEl.style.transform = `rotate(${rotation}deg)`;
+
+            // 等待动画结束
+            setTimeout(() => {
+                isSpinning = false;
+                
+                // 恢复按钮状态
+                spinBtn.disabled = false;
+                spinBtn.innerText = '开 转 ！';
+                spinBtn.classList.add('bg-orange-500', 'hover:bg-orange-600', 'hover:shadow-lg', 'active:scale-95');
+                spinBtn.classList.remove('bg-slate-400', 'cursor-not-allowed', 'transform', 'scale-95');
+                
+                // 计算中奖结果
+                const sliceDegree = 360 / options.length;
+                const effectiveRotation = rotation % 360;
+                const unrotatedAngleAtTop = (360 - effectiveRotation) % 360;
+                const winningIndex = Math.floor(unrotatedAngleAtTop / sliceDegree);
+                
+                showWinnerPopup(options[winningIndex].text);
+                
+            }, 4000); // 4秒，必须与CSS中的 duration-[4000ms] 保持一致
+        }
+
+        // 显示结果弹窗
+        function showWinnerPopup(text) {
+            winnerTextEl.textContent = text;
+            popupEl.classList.remove('hidden');
+            popupEl.classList.add('flex');
+            // 延迟一点点添加透明度，触发过渡动画
+            setTimeout(() => {
+                popupEl.classList.remove('opacity-0');
+                popupEl.classList.add('opacity-100');
+            }, 10);
+        }
+
+        // 关闭结果弹窗
+        function closeWinnerPopup() {
+            popupEl.classList.remove('opacity-100');
+            popupEl.classList.add('opacity-0');
+            // 等待过渡动画结束后隐藏
+            setTimeout(() => {
+                popupEl.classList.add('hidden');
+                popupEl.classList.remove('flex');
+            }, 300);
+        }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
