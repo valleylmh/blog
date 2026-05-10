@@ -18,7 +18,7 @@ marked.setOptions({
   langPrefix: 'hljs language-' // 微信对 class 有过滤，但 inline style 会被 juice 保留
 });
 const myTheme = `
-wrapper { font-size: 16px; line-height: 2em; letter-spacing: 0.1em; }
+.wrapper { font-size: 15px; line-height: 2em; letter-spacing: 0.1em; }
 pre, code {
   font-size: 0.8em;
   line-height: 1.8em;
@@ -120,26 +120,16 @@ h1, h2, h3, h4, h5, h6 {
   text-align: center !important;
   margin: 1.5em 5px !important;
   padding: 0.5em 1em !important;
+  font-size: 17px !important;
 }
 
 h1 {
-  font-size: 24px !important;
   border-bottom: 1px solid #ddd !important;
 }
 
 h2 {
-  font-size: 20px !important;
   border-bottom: 1px solid #eee !important;
 }
-
-h3 {
-  font-size: 18px;
-}
-
-h4 {
-  font-size: 16px;
-}
-
 
 table {
   padding: 0;
@@ -181,7 +171,14 @@ table tr th {
   color: #eee;
   border: 1px solid #009688;
   background-color: #009688;
-}`
+}
+img {
+  width: 100% !important;
+  height: auto !important;
+  display: block;
+  margin: 10px auto;
+}
+`
 // --- 配置区 ---
 const CONFIG = {
   // 从环境变量读取，安全性更高
@@ -267,12 +264,33 @@ async function publishArticle(mdPath, coverPath, title, isPreview = false) {
   try {
     const baseDir = path.dirname(mdPath);
 
-    // A. 读取内容并去掉头部 YAML
+    // A. 读取内容并去掉头部 YAML 以及一级标题
     let content = await fs.readFile(mdPath, 'utf-8');
     content = content.replace(/^---\s*[\r\n]+([\s\S]*?)[\r\n]+---\s*[\r\n]*/, '');
+    content = content.replace(/^\s*#\s+[^\r\n]*[\r\n]*/, '');
 
     // B. 转换 Markdown 并高亮代码
     let html = marked.parse(content);
+
+    // 解决微信编辑器会将 li 内部的内联标签（如 strong）与普通文本拆分到不同 section 的问题
+    // 主动把 li 的内部裸露内容用 section 包裹起来
+    html = html.replace(/<li([^>]*)>([\s\S]*?)<\/li>/ig, (match, attrs, inner) => {
+      if (/^\s*<(p|section|div|ul|ol|blockquote)/i.test(inner)) {
+        return match;
+      }
+      return `<li${attrs}><section>${inner}</section></li>`;
+    });
+
+    // 移除列表相关标签之间的换行和多余空格，防止微信编辑器产生空段落或多余的空行
+    html = html.replace(/<\/li>\s*<li/ig, '</li><li');
+    html = html.replace(/<ul[^>]*>\s*<li/ig, (match) => match.replace(/\s*<li/i, '<li'));
+    html = html.replace(/<\/li>\s*<\/ul>/ig, '</li></ul>');
+    html = html.replace(/<ol[^>]*>\s*<li/ig, (match) => match.replace(/\s*<li/i, '<li'));
+    html = html.replace(/<\/li>\s*<\/ol>/ig, '</li></ol>');
+    html = html.replace(/<li>\s*<ul/ig, '<li><ul');
+    html = html.replace(/<\/ul>\s*<\/li>/ig, '</ul></li>');
+    html = html.replace(/<li>\s*<ol/ig, '<li><ol');
+    html = html.replace(/<\/ol>\s*<\/li>/ig, '</ol></li>');
 
     let token = null;
     if (!isPreview) {
@@ -345,7 +363,6 @@ async function publishArticle(mdPath, coverPath, title, isPreview = false) {
                 </head>
                 <body>
                     <div class="phone-mockup">
-                        <h2 style="text-align: left; margin-bottom: 20px; color: #333;">${title}</h2>
                         ${finalHtml}
                     </div>
                 </body>
