@@ -382,8 +382,8 @@ const args = process.argv.slice(2);
 const isPreviewMode = args.includes('preview');
 
 publishArticle(
-  './docs/ai/articles/date/20260329.md',
-  './docs/public/images/articles/20260329/cover.png',
-  'AI 中转站的“三板斧”：鉴别真假模型的“试金石”',
+  './docs/ai/articles/date/20260409.md',
+  './docs/public/images/articles/20260409/cover.png',
+  '别让你的代码勤奋，掩盖了你的产品懒惰',
   isPreviewMode
 );
