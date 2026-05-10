@@ -293,7 +293,7 @@ async function publishArticle(mdPath, coverPath, title, isPreview = false) {
 
     for (const oldSrc of imgMatches) {
       if (!oldSrc) continue;
-      
+
       if (!oldSrc.includes('http')) {
         let absolutePath;
         if (oldSrc.startsWith('/')) {
@@ -379,11 +379,11 @@ async function publishArticle(mdPath, coverPath, title, isPreview = false) {
 
 // --- 调用示例 (在项目根目录运行: node wechat/wechatAutoPost.js [preview]) ---
 const args = process.argv.slice(2);
-const isPreviewMode = args.includes('preview');
+const isPreviewMode = args.includes('preview'); // node wechat/wechatAutoPost.js preview
 
 publishArticle(
-  './docs/ai/articles/date/20260409.md',
-  './docs/public/images/articles/20260409/cover.png',
-  '别让你的代码勤奋，掩盖了你的产品懒惰',
+  './docs/ai/articles/date/20260509.md',
+  './docs/public/images/articles/20260509/cover.png',
+  '做 StoryBloom 时，我用过的免费文本和生图模型',
   isPreviewMode
 );
