@@ -399,8 +399,8 @@ const args = process.argv.slice(2);
 const isPreviewMode = args.includes('preview'); // node wechat/wechatAutoPost.js preview
 
 publishArticle(
-  './docs/ai/articles/date/20260612.md',
-  './docs/public/images/articles/20260612/cover.png',
-  '从自嗨到被用户推着往前走：真实用户给我补上了产品课',
+  './docs/ai/articles/date/20260622.md',
+  './docs/public/images/articles/20260622/cover.png',
+  '我把一个AI换装Demo，慢慢做成了SASS产品',
   isPreviewMode
 );
