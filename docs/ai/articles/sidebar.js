@@ -10,6 +10,7 @@ module.exports = [
             { text: '做 StoryBloom 时，我用过的免费文本和生图模型', link: "date/20260509.md" },
             { text: '从自嗨到被用户推着往前走：真实用户给我补上了产品课', link: "date/20260612.md" },
             { text: '我把一个AI换装Demo，慢慢做成了SASS产品', link: "date/20260622.md" },
+            { text: '老婆夸我网站做得好，因为儿子的幼儿园证件照真挺像', link: "date/20260712.md" },
         ]
     },
 ]
