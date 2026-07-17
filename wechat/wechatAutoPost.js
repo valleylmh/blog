@@ -399,8 +399,8 @@ const args = process.argv.slice(2);
 const isPreviewMode = args.includes('preview'); // node wechat/wechatAutoPost.js preview
 
 publishArticle(
-  './docs/ai/articles/date/20260712.md',
-  './docs/public/images/articles/20260712/cover.png',
-  '老婆夸我网站做得好，因为儿子的幼儿园证件照真挺像',
+  './docs/ai/articles/date/20260716.md',
+  './docs/public/images/articles/20260716/cover.png',
+  '送福利：一次性免费使用gpt-image-2生图最多20次',
   isPreviewMode
 );
