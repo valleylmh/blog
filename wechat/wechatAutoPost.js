@@ -218,13 +218,20 @@ async function getAccessToken() {
 async function uploadAndCompressImg(token, imgPath, isCover = false) {
   let buffer = await fs.readFile(imgPath);
   const meta = await sharp(buffer).metadata();
+  const ext = path.extname(imgPath).toLowerCase();
+  // 正文 uploadimg 只支持 jpg/png；webp 等格式需先转码，且文件名扩展名也要匹配
+  const needConvert =
+    !['.jpg', '.jpeg', '.png'].includes(ext) ||
+    buffer.length > 1 * 1024 * 1024 ||
+    (meta.width && meta.width > 1200);
 
-  // 如果超过 2MB 或宽度太大，进行处理
-  if (buffer.length > 2 * 1024 * 1024 || meta.width > 1200) {
+  let filename = path.basename(imgPath);
+  if (needConvert) {
     buffer = await sharp(buffer)
       .resize(1200, null, { withoutEnlargement: true })
       .jpeg({ quality: 80 })
       .toBuffer();
+    filename = path.basename(imgPath, ext) + '.jpg';
   }
 
   const type = isCover ? 'material/add_material?type=image' : 'media/uploadimg';
@@ -233,7 +240,7 @@ async function uploadAndCompressImg(token, imgPath, isCover = false) {
   const url = `https://api.weixin.qq.com/cgi-bin/${type}${separator}access_token=${token}`;
 
   const form = new FormData();
-  form.append('media', buffer, { filename: path.basename(imgPath) });
+  form.append('media', buffer, { filename, contentType: needConvert || ext === '.jpg' || ext === '.jpeg' ? 'image/jpeg' : 'image/png' });
 
   const formHeaders = form.getHeaders();
   // 获取表单真实长度，很多微信网关会校验这个
@@ -254,7 +261,18 @@ async function uploadAndCompressImg(token, imgPath, isCover = false) {
     maxContentLength: Infinity,
     maxBodyLength: Infinity
   });
-  return isCover ? res.data.media_id : res.data.url;
+
+  if (isCover) {
+    if (!res.data.media_id) {
+      console.warn('封面上传接口返回异常:', res.data);
+    }
+    return res.data.media_id;
+  }
+
+  if (!res.data.url) {
+    console.warn('正文图片上传接口返回异常:', res.data);
+  }
+  return res.data.url;
 }
 
 /**
@@ -399,8 +417,8 @@ const args = process.argv.slice(2);
 const isPreviewMode = args.includes('preview'); // node wechat/wechatAutoPost.js preview
 
 publishArticle(
-  './docs/ai/articles/date/20260716.md',
-  './docs/public/images/articles/20260716/cover.png',
-  '送福利：一次性免费使用gpt-image-2生图最多20次',
+  './docs/ai/articles/date/20260719.md',
+  './docs/public/images/articles/20260719/cover.webp',
+  '儿童绘本生成器升级了：从一句话，到可以分享的视频',
   isPreviewMode
 );

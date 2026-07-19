@@ -12,6 +12,7 @@ module.exports = [
             { text: '我把一个AI换装Demo，慢慢做成了SASS产品', link: "date/20260622.md" },
             { text: '老婆夸我网站做得好，因为儿子的幼儿园证件照真挺像', link: "date/20260712.md" },
             { text: '送福利：一次性免费使用gpt-image-2生图最多20次', link: "date/20260716.md" },
+            { text: '儿童绘本生成器又升级了：从一句话，到可以分享的视频', link: "date/20260719.md" },
         ]
     },
 ]
