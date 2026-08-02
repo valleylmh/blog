@@ -417,8 +417,8 @@ const args = process.argv.slice(2);
 const isPreviewMode = args.includes('preview'); // node wechat/wechatAutoPost.js preview
 
 publishArticle(
-  './docs/ai/articles/date/20260719.md',
-  './docs/public/images/articles/20260719/cover.webp',
-  '儿童绘本生成器升级了：从一句话，到可以分享的视频',
+  './docs/ai/articles/date/20260802.md',
+  './docs/public/images/articles/20260802/cover.webp',
+  'StoryBloom 开源了：一个给孩子讲故事的 AI 绘本生成器',
   isPreviewMode
 );

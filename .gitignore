@@ -7,5 +7,7 @@ dist
 .agents
 .env
 wechat/.wechat_token.json
+wechat/.wechat_picture_media.json
 wechat/preview.html
 comic
+.DS_Store
