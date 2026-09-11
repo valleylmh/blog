@@ -14,6 +14,7 @@ module.exports = [
             { text: '送福利：一次性免费使用gpt-image-2生图最多20次', link: "date/20260716.md" },
             { text: '儿童绘本生成器又升级了：从一句话，到可以分享的视频', link: "date/20260719.md" },
             { text: 'StoryBloom 开源了：一个给孩子讲故事的 AI 绘本生成器', link: "date/20260802.md" },
+            { text: '一句话生成一本绘本：聚焦一个免费提供商后，插图终于像同一本书了', link: "date/20260910.md" },
         ]
     },
 ]
