@@ -417,8 +417,8 @@ const args = process.argv.slice(2);
 const isPreviewMode = args.includes('preview'); // node wechat/wechatAutoPost.js preview
 
 publishArticle(
-  './docs/ai/articles/date/20260910.md',
-  './docs/public/images/articles/20260910/cover.png',
-  '一句话生成一本绘本：聚焦一个免费提供商后，插图终于像同一本书了',
+  './docs/ai/articles/date/20260913.md',
+  './docs/public/images/articles/20260913/cover.png',
+  '226 本绘本，都是晚上电脑不休息跑出来的',
   isPreviewMode
 );
