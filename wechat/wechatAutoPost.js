@@ -417,8 +417,8 @@ const args = process.argv.slice(2);
 const isPreviewMode = args.includes('preview'); // node wechat/wechatAutoPost.js preview
 
 publishArticle(
-  './docs/ai/articles/date/20260919.md',
-  './docs/public/images/articles/20260919/cover.png',
-  '又生成了 500 张识字卡，这次轻松了不少',
+  './docs/ai/articles/date/20261006.md',
+  './docs/public/images/articles/20261006/cover.png',
+  '给家人拍张没有路人的照片，有多难？',
   isPreviewMode
 );
