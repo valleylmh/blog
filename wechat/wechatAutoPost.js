@@ -417,8 +417,8 @@ const args = process.argv.slice(2);
 const isPreviewMode = args.includes('preview'); // node wechat/wechatAutoPost.js preview
 
 publishArticle(
-  './docs/ai/articles/date/20261017_2045.md',
-  './docs/public/images/articles/20261017_2045/cover.png',
-  '不知不觉 364 本了：绘本馆的 4576 张画，与冲刺 500 本的小目标',
+  './docs/ai/articles/date/20261031.md',
+  './docs/public/images/articles/20261031/cover.png',
+  '让 AI 给我的《闪电出租车》做了一支宣传片',
   isPreviewMode
 );
