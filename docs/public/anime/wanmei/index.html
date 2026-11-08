@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#151416">
+  <title>完美世界 · 石昊一生｜故事与修行时间轴</title>
+  <meta name="description" content="从石村小不点到独断万古的荒天帝，沿辰东原著梳理石昊的故事、逐境突破、人物战力、亲友与情缘。">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23151416'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-size='42' fill='%23e1ba79'%3E荒%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="power.css?v=20261015">
+  <script src="data.js" defer></script>
+  <script src="cultivation.js" defer></script>
+  <script src="relationships.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="power-data.js?v=20261015" defer></script>
+  <script src="power.js?v=20261015" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#timeline">跳到故事时间轴</a>
+  <header class="topbar">
+    <a class="brand" href="#top"><span class="seal">荒</span><span>完美世界 <i>石昊纪事</i></span></a>
+    <nav aria-label="页面导航"><a href="#timeline">故事长卷</a><a href="#realms">境界图谱</a><a href="#power-ranking">战力榜</a><a href="#relationships">人物关系</a><a href="#people">故人</a><a href="#sources">阅读说明</a></nav>
+    <span class="spoiler">全书剧透</span>
+  </header>
+  <div class="layout" id="top">
+    <aside class="sidebar">
+      <div class="side-heading">石昊的一生 <small>十段旅程 · 按小说事件先后</small></div>
+      <nav id="chapter-nav" aria-label="时间轴篇章"></nav>
+      <div class="side-note"><span>从一株柳树下，<br>走到万古的尽头。</span><p>节点间距表示阅读顺序，<br>不代表相同的时间跨度。</p></div>
+      <a class="source-short" href="#sources">原著与资料来源 ↗</a>
+    </aside>
+    <main>
+      <section class="intro" aria-labelledby="page-title">
+        <figure class="hero-art"><img src="assets/shihao-wilderness.webp" width="1536" height="1024" alt="年轻修士立于群山云海之上，远处金绿柳树映着晨光的想象插画" fetchpriority="high"><figcaption>AI 氛围插画 · 非官方角色图</figcaption></figure>
+        <div class="intro-copy"><p class="eyebrow">辰东 · 原著小说人物纪事</p><h1 id="page-title">石昊一生<span>从石村，走向独断万古。</span></h1><p class="intro-lead">小时候，想守住一座村庄。<br>后来，身后是整个世界。</p><div class="intro-meta"><span>下界 · 九天十地 · 仙域与界海</span><span id="event-count">故事事件</span><span>小不点 → 荒天帝</span></div><a class="start-reading" href="#timeline">展开故事长卷 <span>↓</span></a></div>
+      </section>
+      <section id="timeline" class="timeline-section">
+        <div class="section-heading"><div><p class="eyebrow">01 / 故事长卷</p><h2>一路向前，也一路回望</h2></div><p>读故事，也看每次突破的条件与代价。</p></div>
+        <div id="coverage-summary" class="coverage-summary" aria-label="本页内容范围"></div>
+        <div class="reading-guide"><b>读这条时间轴，先分清三件事</b><div><p><strong>境界与借来的战力</strong>帝关的“他化自在”有特殊真血相助；安澜之战的力量另列说明。</p><p><strong>仙气、骨与轮回印</strong>它们属于道基、宝术与复苏的线索；修为阶梯按实际突破记录。</p><p><strong>本作与后续作品</strong>主线止于荒天帝平乱、独断万古与上苍之上的入口。</p></div></div>
+        <div class="reading-controls">
+          <div class="lens-bar" role="group" aria-label="选择阅读线索"><button class="active" data-lens="all" aria-pressed="true">完整故事</button><button data-lens="crisis" aria-pressed="false">危机与转折</button><button data-lens="growth" aria-pressed="false">逐境修行</button><button data-lens="love" aria-pressed="false">情缘线</button><button data-lens="kin" aria-pressed="false">亲友与师承</button></div>
+          <div class="search-row"><label for="story-search"><span class="search-symbol" aria-hidden="true">⌕</span><input id="story-search" type="search" aria-label="搜索人物、地点、宝术或事件" placeholder="搜索人物、地点、宝术或事件" autocomplete="off" maxlength="80"></label><button id="clear-search" hidden>清除搜索</button><button id="toggle-details" aria-pressed="false">展开本页详情</button><span id="visible-count" role="status" aria-live="polite"></span></div>
+        </div>
+        <p id="lens-note" class="lens-note" aria-live="polite"></p>
+        <section id="love-routes" hidden aria-label="三条主要情缘路线"></section>
+        <section id="cultivation" hidden aria-label="逐境突破与强敌"><div class="cultivation-title"><h3>每一步，如何走上去</h3><p>把地点、突破条件、对手和结果放在一起看。道基重塑、借力与复苏单列说明。</p></div><nav id="cultivation-nav" aria-label="境界快速定位"></nav><details class="parallel-register"><summary>境界之外：四条贯穿一生的力量线索</summary><div id="parallel-list"></div></details><div id="cultivation-list"></div></section>
+        <div id="story"></div>
+        <div id="empty-state" class="empty-state" hidden><span>此处暂无线索</span><p>试试“柳神”“鲲鹏巢”或“安澜”，也可以回到完整故事。</p><button id="reset-filters">清除搜索并读完整故事</button></div>
+      </section>
+      <section id="realms" class="lower-section"><div class="section-heading"><div><p class="eyebrow">02 / 境界图谱</p><h2>境界有阶，前路由自己开</h2></div><p>点击境界，回到突破与强敌的场景。</p></div><div id="realm-map"></div><p class="realm-note">此处排列石昊实际走过的大境界。仙气是道基，“以身为种”是修行方法；至尊骨的变化、轮回印的归一与阶段性战力分别说明。小阶段未逐章核定的部分采用阶段概括。</p><div class="sequel-note"><span>卷外 / 跨越岁月的线索</span><b>《遮天》与《圣墟》</b><p>叶倾仙、曹雨生及未来时空的来客连接了更大的故事。后续作品展开的身份、复活与更高层级修行，留在各自作品中阅读。</p></div></section>
+      <section id="power-ranking" class="lower-section" aria-labelledby="power-title"><div class="section-heading"><div><p class="eyebrow">03 / 人物战力榜</p><h2 id="power-title">这一局，谁站在更高处</h2></div><p>按时期看强弱，按战果看条件。</p></div><div id="power-explorer"></div></section>
+      <section id="relationships" class="lower-section"><div class="section-heading"><div><p class="eyebrow">04 / 人物关系图</p><h2>故人是来路，也是归处</h2></div><p>选择人物，回到关系发生变化的故事。</p></div><div id="relationship-diagram"></div><div class="relationship-facts"><p><b>清漪</b>来自<b>月婵的次身</b>，此后有独立的经历与选择；<b>秦昊</b>是石昊的亲弟弟，<b>石毅</b>是族兄。</p><p><b>小石头</b>是石昊与云曦之子；<b>火灵儿</b>的黑暗化与寻找旧时记忆，是后期情缘的重要转折。</p></div></section>
+      <section id="people" class="lower-section"><div class="section-heading"><div><p class="eyebrow">05 / 故人详情</p><h2>曾与他同行的人</h2></div><p>长久的陪伴，和无法忘记的诀别。</p></div><div id="people-grid"></div></section>
+      <section id="sources" class="lower-section source-section"><p class="eyebrow">06 / 阅读说明</p><h2>以小说为轴，循线重读</h2><p>这是围绕石昊整理的《完美世界》全书主线导读，包含结局剧透。十段旅程是本页的阅读分段，故事标题与解读为重新归纳，适合回顾重大事件、修为变化和人物关系。</p><p>采用相对先后，节点距离不表示真实年数。早期顺序、九世成仙与终局阶段参考原著目录、许可译本及人物资料交叉核对；公开预览和目录不能替代完整原文。尚未完成逐章校勘的年龄、小境界时点和轮回印逐道来源不强配数字。</p><p>帝关战安澜时的借力与永久修为分开；尊者境的道基重塑与首次突破分开；冲击仙王时遭三王狙杀、葬土复苏和真正成王分开。三准仙帝、灭世老人、尸骸仙帝分别记述，后续作品中的诡异始祖与祭道等阶段另属其他故事。</p><p>卷首图由内置 imagegen 生成，表现群山、柳树与远行的氛围。战力榜另配三时期象征长卷和六人物画像。所有配图都是想象插画，角色外观与环境不作为原著场景或动画形象的证据；同一人物画像用于识别身份，不表示各阶段外观相同。程序、图像和字体均可本地使用；正文资料链接需要联网。</p><p><a class="original-link" href="https://www.qidian.com/book/2802990/" target="_blank" rel="noopener noreferrer">阅读辰东原著 · 起点中文网 ↗</a></p><ol id="source-list"></ol><p class="source-foot">作品：辰东《完美世界》 · 非官方读者导览 · 故事依小说与公开资料整理</p></section>
+      <footer><span>远行至万古，仍记得一株柳树。</span><a href="#top">回到卷首 ↑</a></footer>
+    </main>
+  </div>
+  <button id="back-top" aria-label="回到卷首" hidden>↑</button>
+  <noscript><p class="noscript">故事数据需要 JavaScript 展开。请启用 JavaScript 后阅读此时间轴。</p></noscript>
+</body>
+</html>

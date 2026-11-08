@@ -1,0 +1,86 @@
+/* 人物星图：关系分区保持可读；只为当前人物强调具体连线。 */
+.relationship-explorer{margin-top:25px;container-type:inline-size;min-width:0}
+.relationship-controls{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.relationship-filters,.relationship-view-toggle{display:flex;gap:6px;flex-wrap:wrap}
+.relationship-controls button{border:1px solid var(--line);background:#101d2a;color:#bcc7d1;cursor:pointer;padding:8px 13px;border-radius:4px;font-size:.875rem;min-height:44px}
+.relationship-filters small{color:var(--relationship-tone);margin-left:8px;font-size:.875rem}
+.relationship-controls button[aria-pressed=true]{border-color:var(--relationship-tone,var(--gold));color:var(--relationship-tone,var(--gold));background:#1c2b3a}
+.relationship-readout{display:flex;justify-content:space-between;gap:15px;align-items:center;margin:14px 0;font-size:.875rem}
+.relationship-detail-link{color:var(--gold);border-bottom:1px solid #766347;white-space:nowrap}
+.relationship-viewport{overflow-x:auto;border:1px solid #344351;border-radius:8px;background:#0c1723}
+.relationship-scene{display:grid;grid-template-columns:minmax(0,1fr) 136px minmax(0,1fr);grid-template-rows:auto auto;gap:25px 28px;position:relative;padding:28px 22px;background:radial-gradient(ellipse at center,#20314355,transparent 65%);isolation:isolate}
+.relationship-connections{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;overflow:visible}
+.relationship-connections path{fill:none;stroke-width:1.3;opacity:.2;vector-effect:non-scaling-stroke}
+.relationship-connections path.is-group-focused{opacity:.55;stroke-width:1.7}
+.relationship-connections path.is-focused{opacity:.95;stroke-width:2}
+.relationship-center-slot{grid-column:2;grid-row:1/3;align-self:center;position:relative}
+.relationship-group{min-width:0;position:relative}
+.relationship-group-love{grid-column:1;grid-row:1}.relationship-group-kin{grid-column:1;grid-row:2}.relationship-group-mentor{grid-column:3;grid-row:1}.relationship-group-foe{grid-column:3;grid-row:2}
+.relationship-group header{margin-bottom:14px;border-bottom:1px solid #2c3947;padding-bottom:10px}
+.relationship-group h3{color:var(--relationship-tone);font-size:1.125rem;letter-spacing:.06em}
+.relationship-group header p{font-size:.875rem;margin-top:4px;line-height:1.7}
+.relationship-members{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.relationship-node{display:flex;align-items:center;gap:9px;min-width:0;width:100%;min-height:80px;padding:11px 9px;background:#132130;border:1px solid #354351;border-radius:6px;color:var(--text);text-align:left;cursor:pointer;position:relative;transition:border-color .16s,background .16s,opacity .16s}
+.relationship-node:hover{border-color:var(--relationship-tone);background:#1d2e40}
+.relationship-node[aria-pressed=true]{border-color:var(--relationship-tone);background:#213246;box-shadow:inset 0 0 0 1px var(--relationship-tone)}
+.relationship-node.is-related{border-color:#b1986a;background:#1c2d3d}
+.relationship-node.is-muted{opacity:.6}
+.relationship-node.is-muted:hover,.relationship-node.is-muted:focus-visible{opacity:1}
+.relationship-avatar{width:42px;height:42px;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid #728495;background:#23364a}
+.relationship-avatar img{width:100%;height:100%;object-fit:cover;object-position:center 36%;display:block}
+.relationship-avatar>span{font:1.25rem 'Songti SC',serif;color:#d4c298}
+.relationship-node-copy{min-width:0;display:block}
+.relationship-node-copy strong{display:block;font-size:1rem;font-weight:500;line-height:1.45;overflow-wrap:anywhere;text-wrap:balance}
+.relationship-node-copy small{display:block;color:#b1bdc8;font-size:.875rem;line-height:1.7;margin-top:4px;text-wrap:balance}
+.relationship-center{flex-direction:column;gap:12px;border-color:#917a53;border-radius:60px 60px 9px 9px;padding:18px 10px;text-align:center;background:#182736;box-shadow:0 0 0 7px #142332,0 0 0 8px #5c513d}
+.relationship-center .relationship-avatar{width:96px;height:96px;border-color:#c8a768}
+.relationship-center .relationship-node-copy strong{font-family:'Songti SC',serif;font-size:1.7rem;letter-spacing:.15em;color:var(--gold)}
+.relationship-center .relationship-node-copy small{font-size:.875rem}
+.relationship-center-note{font-size:.875rem;color:#a8b9c6;line-height:1.7;border-top:1px solid var(--line);padding-top:12px;width:100%}
+.relationship-caption{margin-top:12px;font-size:.875rem;line-height:1.8}
+.relationship-pan-note{display:none}
+.relationship-inspector{display:grid;grid-template-columns:180px minmax(0,1fr) minmax(190px,.65fr);gap:28px;border:1px solid #3d4b57;border-top:2px solid #9b8054;background:#101e2b;padding:26px;margin-top:22px;border-radius:5px;scroll-margin-top:16px}
+.relationship-person-intro{min-width:0}
+.relationship-detail-avatar{width:108px;height:108px;border-radius:8px;margin-bottom:14px}
+.relationship-art-link{display:block;flex-shrink:0;width:max-content}
+.relationship-art-link:hover .relationship-avatar{border-color:var(--gold)}
+.relationship-person-type{color:var(--relationship-tone);font-size:.875rem}
+.relationship-person-intro h3{font-size:1.75rem;letter-spacing:.07em;margin:4px 0}
+.relationship-person-intro small{color:#8fa3b4;font-size:.75rem;display:block;margin-top:8px}
+.relationship-person-intro p{font-size:.875rem;line-height:1.8}
+.relationship-inspector h4{font:500 1rem system-ui;margin:0 0 10px;color:#d6dfe6;line-height:1.7}
+.relationship-person-story>p{font-size:1rem;line-height:1.9}
+.relationship-related{border-top:1px solid var(--line);margin-top:18px;padding-top:15px}
+.relationship-related>div{display:flex;align-items:baseline;gap:8px 12px;flex-wrap:wrap;margin-top:10px;font-size:.875rem}
+.relationship-related span{color:var(--muted)}
+.relationship-peer{background:#243445;border:1px solid #62717d;color:var(--text);padding:4px 10px;border-radius:3px;cursor:pointer;font-size:.875rem;min-height:36px}
+.relationship-related a{color:var(--gold);border-bottom:1px solid #65563e;font-size:.875rem}
+.relationship-person-events{border-left:1px solid var(--line);padding-left:20px}
+.relationship-person-events ol{margin:0;padding:0 0 0 18px}
+.relationship-person-events li{padding:0 0 12px;color:#b6a484}
+.relationship-person-events a{color:var(--gold);font-size:.875rem}
+.relationship-person-events a:hover{text-decoration:underline;text-underline-offset:4px}
+.relationship-person-events small{display:block;font-size:.75rem;color:#98aaba;line-height:1.7;margin-top:3px}
+.relationship-overview{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:20px}
+.relationship-overview button{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;border:1px solid #3b4b58;border-left:2px solid var(--relationship-tone);border-radius:3px;background:#182838;color:var(--relationship-tone);cursor:pointer;font-size:.875rem;text-align:left;flex-wrap:wrap}
+.relationship-overview span{font-size:.75rem;color:var(--muted)}
+.relationship-text-list{margin-top:20px}
+.relationship-text-list summary{cursor:pointer;font-size:.875rem;color:var(--blue);padding:8px 0}
+.relationship-text-list h3{font-size:1rem;color:var(--gold);margin-top:14px}
+.relationship-text-list ul{margin-top:8px;padding-left:20px}
+.relationship-text-list li{font-size:1rem;color:var(--muted);margin:10px 0}
+.relationship-text-list b{color:var(--text);font-weight:500}
+.relationship-text-list a{color:var(--blue);font-size:.875rem;text-decoration:underline;text-underline-offset:3px}
+.relationship-explorer[data-relation-filter]:not([data-relation-filter=all]) .relationship-scene{grid-template-columns:minmax(0,1fr) 150px;gap:38px;align-items:center}
+.relationship-explorer[data-relation-filter]:not([data-relation-filter=all]) .relationship-group{grid-column:1;grid-row:1}
+.relationship-explorer[data-relation-filter]:not([data-relation-filter=all]) .relationship-center-slot{grid-column:2;grid-row:1}
+.relationship-explorer[data-relation-filter]:not([data-relation-filter=all]) .relationship-members{grid-template-columns:repeat(3,minmax(0,1fr))}
+.relationship-explorer[data-relation-view=list] .relationship-scene{display:grid;grid-template-columns:1fr 1fr;gap:25px;padding:24px}
+.relationship-explorer[data-relation-view=list] .relationship-group{grid-column:auto;grid-row:auto}
+.relationship-explorer[data-relation-view=list] .relationship-center-slot,.relationship-explorer[data-relation-view=list] .relationship-connections{display:none}
+.relationship-explorer[data-relation-view=list] .relationship-node.is-muted{opacity:1}
+.relationship-explorer[data-relation-view=list][data-relation-filter]:not([data-relation-filter=all]) .relationship-scene{grid-template-columns:1fr}
+@container(max-width:900px){.relationship-inspector{grid-template-columns:150px 1fr;gap:22px}.relationship-person-events{grid-column:1/3;border-left:0;border-top:1px solid var(--line);padding:18px 0 0}.relationship-person-events ol{display:grid;grid-template-columns:1fr 1fr;gap:8px 25px}.relationship-members{grid-template-columns:1fr}.relationship-node{min-height:64px}.relationship-node-copy small{font-size:.875rem}.relationship-scene{grid-template-columns:minmax(0,1fr) 126px minmax(0,1fr);gap:26px 22px;padding:24px 18px}.relationship-explorer[data-relation-filter]:not([data-relation-filter=all]) .relationship-members{grid-template-columns:repeat(2,minmax(0,1fr))}.relationship-explorer[data-relation-view=list] .relationship-members{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@container(max-width:650px){.relationship-inspector{grid-template-columns:1fr;padding:20px}.relationship-person-intro{display:flex;align-items:center;gap:16px}.relationship-detail-avatar{width:92px;height:92px;margin-bottom:0}.relationship-person-events{grid-column:auto}.relationship-person-events ol{grid-template-columns:1fr}.relationship-explorer[data-relation-view=list] .relationship-scene{grid-template-columns:1fr;padding:16px;gap:24px}.relationship-explorer[data-relation-view=graph] .relationship-scene{min-width:740px}.relationship-group h3{font-size:1.125rem}.relationship-controls button{padding:7px 11px}.relationship-filters{gap:5px}.relationship-filters small{margin-left:6px}.relationship-readout{align-items:start;font-size:.875rem}.relationship-pan-note{display:block;margin-top:6px}.relationship-overview{grid-template-columns:1fr 1fr}.relationship-inspector{scroll-margin-top:16px}}
+@container(max-width:380px){.relationship-explorer[data-relation-view=list] .relationship-members{grid-template-columns:1fr}.relationship-person-intro{align-items:start}.relationship-detail-avatar{width:80px;height:80px}.relationship-overview{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.relationship-node{transition:none}}

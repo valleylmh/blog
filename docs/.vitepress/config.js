@@ -96,6 +96,14 @@ module.exports = {
         ]
       },
       {
+        text: '动漫导览',
+        items: [
+          { text: '仙逆 · 王林', link: '/anime/xianni/index.html', target: '_blank' },
+          { text: '凡人修仙传 · 韩立', link: '/anime/fanren/index.html', target: '_blank' },
+          { text: '完美世界 · 石昊', link: '/anime/wanmei/index.html', target: '_blank' },
+        ]
+      },
+      {
         text: 'FrontEnd',
         items: [
           {

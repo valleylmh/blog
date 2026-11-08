@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0b1718">
+  <title>凡人修仙传 · 韩立一生｜故事时间轴与人物战力榜</title>
+  <meta name="description" content="从七玄门少年到飞升仙界，按忘语原著十一卷梳理韩立的故事、逐境突破、强敌与故人，并按篇章查看人物阶段战力与巅峰分档。">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b1718'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-size='42' fill='%23d1b880'%3E凡%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <script src="data.js" defer></script>
+  <script src="cultivation.js" defer></script>
+  <script src="relationships.js" defer></script>
+  <script src="app.js" defer></script>
+  <link rel="stylesheet" href="power.css?v=20261015">
+  <script src="power-data.js?v=20261015" defer></script>
+  <script src="power.js?v=20261015" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#timeline">跳到故事时间轴</a>
+  <header class="topbar">
+    <a class="brand" href="#top"><span class="seal">凡</span><span>凡人修仙传 <i>韩立纪事</i></span></a>
+    <nav aria-label="页面导航"><a href="#timeline">故事长卷</a><a href="#realms">境界图谱</a><a href="#relationships">人物关系</a><a href="#power-ranking">战力榜</a><a href="#people">故人</a><a href="#sources">阅读说明</a></nav>
+    <span class="spoiler">全书剧透</span>
+  </header>
+  <div class="layout" id="top">
+    <aside class="sidebar">
+      <div class="side-heading">韩立的一生 <small>十一卷 · 按小说事件先后</small></div>
+      <nav id="chapter-nav" aria-label="时间轴篇章"></nav>
+      <div class="side-note"><span>资质寻常，也能<br>一步一步走到天外。</span><p>节点按故事先后排列，<br>间距不表示实际年数。</p></div>
+      <a class="source-short" href="#sources">原著与资料来源 ↗</a>
+    </aside>
+    <main>
+      <section class="intro" aria-labelledby="page-title">
+        <figure class="hero-art"><img src="assets/hanli-mountains.webp" width="1536" height="1024" alt="青衣修士背着小瓶，远望云海与群山的想象插画" fetchpriority="high"><figcaption>AI 氛围插画 · 非官方角色图</figcaption></figure>
+        <div class="intro-copy"><p class="eyebrow">忘语 · 原著小说人物纪事</p><h1 id="page-title">韩立一生<span>以凡人之身，走一条长生路。</span></h1><p class="intro-lead">一只小瓶，几位故人，数次远行。<br>沿着每一步修行，读懂他的选择与代价。</p><div class="intro-meta"><span>人界 · 灵界 · 魔界</span><span id="event-count">故事事件</span><span>七玄门 → 飞升仙界</span></div><a class="start-reading" href="#timeline">展开故事长卷 <span>↓</span></a></div>
+      </section>
+      <section id="timeline" class="timeline-section">
+        <div class="section-heading"><div><p class="eyebrow">01 / 故事长卷</p><h2>从一介少年，到韩天尊</h2></div><p>读故事，也看每一次突破的来路。</p></div>
+        <div id="coverage-summary" class="coverage-summary" aria-label="本页内容范围"></div>
+        <div class="reading-guide"><b>读这条时间轴，先分清三件事</b><div><p><strong>境界与战力</strong>跨阶胜敌要看宝物、环境与援手，不能直接换算成已进阶。</p><p><strong>本体与辅助路线</strong>曲魂煞丹、第二元婴、炼体与灵虫，各有成长过程。</p><p><strong>本传与续作</strong>这里写到〈飞升仙界〉。《仙界篇》的真仙以后修行另属一部。</p></div></div>
+        <div class="reading-controls">
+          <div class="lens-bar" role="group" aria-label="选择阅读线索"><button class="active" data-lens="all" aria-pressed="true">完整故事</button><button data-lens="crisis" aria-pressed="false">危机与转折</button><button data-lens="growth" aria-pressed="false">逐境修行</button><button data-lens="love" aria-pressed="false">情缘线</button><button data-lens="kin" aria-pressed="false">亲友与师承</button></div>
+          <div class="search-row"><label for="story-search"><span class="search-symbol" aria-hidden="true">⌕</span><input id="story-search" type="search" placeholder="搜索人物、地点、宝物或事件" autocomplete="off" maxlength="80"></label><button id="clear-search" hidden>清除搜索</button><button id="toggle-details" aria-pressed="false">展开本页详情</button><span id="visible-count" role="status" aria-live="polite"></span></div>
+        </div>
+        <p id="lens-note" class="lens-note" aria-live="polite"></p>
+        <section id="love-routes" hidden aria-label="三条主要情缘路线"></section>
+        <section id="cultivation" hidden aria-label="逐境突破与强敌"><div class="cultivation-title"><h3>每一步，如何走上去</h3><p>地点、契机、当时的对手与结果，一起看。连续灌体和伤后恢复单独说明。</p></div><nav id="cultivation-nav" aria-label="境界快速定位"></nav><details class="parallel-register"><summary>同时在走的四条路：本体之外的力量</summary><div id="parallel-list"></div></details><div id="cultivation-list"></div></section>
+        <div id="story"></div>
+        <div id="empty-state" class="empty-state" hidden><span>此处暂无线索</span><p>试试“虚天殿”“南宫婉”或“炼虚”，也可以回到完整故事。</p><button id="reset-filters">清除搜索并读完整故事</button></div>
+      </section>
+      <section id="realms" class="lower-section"><div class="section-heading"><div><p class="eyebrow">02 / 境界图谱</p><h2>走过的阶梯，各有门槛</h2></div><p>点击境界，回到具体的突破场景。</p></div><div id="realm-map"></div><p class="realm-note">灵界小天劫、大天劫与最终飞升之劫各有规则。“渡劫”在这里表示最后的飞升关口。小阶段与跨界不另造未经核对的精确年龄。</p><div class="sequel-note"><span>卷外 / 下一段旅程</span><b>真仙 → 金仙 → 太乙 → 大罗</b><p>这些境界属于《凡人修仙之仙界篇》。本页主线以韩立飞升仙界为止。</p><a href="https://www.qidian.com/book/1010734492/" target="_blank" rel="noopener noreferrer">续作正版入口 ↗</a></div></section>
+      <section id="relationships" class="lower-section"><div class="section-heading"><div><p class="eyebrow">03 / 人物关系图</p><h2>长生路上，仍有牵挂</h2></div><p>选择关系节点，展开对应故事。</p></div><div id="relationship-diagram"></div><div class="relationship-facts"><p><b>银月、雪玲、珑梦与玲珑</b>有分魂、融合与身份关联；<b>张铁与曲魂</b>要区分原来的人、身体与后来的占据者。</p><p><b>冰凤的突破助力</b>、<b>蟹道人的协议</b>与<b>宝花的合作</b>都保留具体条件；关系会随事件发生变化。</p></div></section>
+      <section id="power-ranking" class="lower-section"><div class="section-heading"><div><p class="eyebrow">04 / 人物战力榜</p><h2>每一程，谁与他争锋</h2></div><p>按境界、地图与人物切换，看这一局的强弱与战果。</p></div><div id="power-explorer" aria-label="凡人修仙传阶段与巅峰人物战力榜"></div></section>
+      <section id="people" class="lower-section"><div class="section-heading"><div><p class="eyebrow">05 / 故人详情</p><h2>他记得的人</h2></div><p>有些共同走远，有些留在来路。</p></div><div id="people-grid"></div></section>
+      <section id="sources" class="lower-section source-section"><p class="eyebrow">06 / 阅读说明</p><h2>以原著为轴，循线重读</h2><p>这是围绕韩立整理的原著主线导读，含本传结局剧透。十一卷导航沿用小说分卷顺序；故事节点、标题与说明由本页重新归纳，覆盖重大转折与代表性小阶段，适合回顾和定位。</p><p>资料查阅包含正版入口、目录与读者整理。公开年历的年龄、个别名称和分章有差异，因此本页采用相对先后，没有给所有事件强配精确年岁或章号。节点末尾的资料链接是进一步核对的入口；不表示已经完成逐章校勘。</p><p>修为、重修恢复、法宝增强与外部助力分别标注。炼虚中期在广寒界连续灌体中单列为过程，合体突破放在回归后的闭关。与圣祖化身交战不等同于斩杀本体；主要胜战保留环境、援手和对手状态。</p><p>人物战力榜按篇章出现状态和本传代表层次分档，档内并列。分档属于读者归纳；缺乏同条件交战依据的仙级、真灵、残魂与分魂另外说明。《仙界篇》的后续境界未纳入本传榜。</p><p>卷首图、战力合画与九格人物图集由 imagegen 内置工具生成，均为想象插画。人物外观、姿态、衣着与画面气势不作为战力或原著事实的证据。页面字体使用设备已有字体，图像与程序均在本地。</p><p><a class="original-link" href="https://www.qidian.com/book/107580/" target="_blank" rel="noopener noreferrer">阅读忘语原著 · 起点中文网 ↗</a></p><ol id="source-list"></ol><p class="source-foot">作品：忘语《凡人修仙传》 · 非官方读者导览 · 故事内容依原著与资料整理</p></section>
+      <footer><span>凡人也有，走到天外的那一天。</span><a href="#top">回到卷首 ↑</a></footer>
+    </main>
+  </div>
+  <button id="back-top" aria-label="回到卷首" hidden>↑</button>
+  <noscript><p class="noscript">故事数据需要 JavaScript 展开。请启用 JavaScript 后阅读此时间轴。</p></noscript>
+</body>
+</html>
