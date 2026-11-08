@@ -103,6 +103,7 @@ module.exports = {
           { text: '完美世界 · 石昊', link: '/anime/wanmei/index.html', target: '_blank' },
         ]
       },
+      { text: '3D 车展', link: '/3d/lightning-taxi/index.html', target: '_blank' },
       {
         text: 'FrontEnd',
         items: [
